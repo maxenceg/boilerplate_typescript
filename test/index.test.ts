@@ -6,4 +6,19 @@ describe("compare user consumption", () => {
 
     expect(result).toEqual([]);
   });
+
+  test("compareUserConsumption should return empty categories", () => {
+    const result = compareUserConsumption({ userId: 1 });
+
+    expect(result).toEqual([
+      {
+        category: "Restaurants",
+        totalAmount: 90,
+      },
+      {
+        category: "Golf",
+        totalAmount: 90,
+      },
+    ]);
+  });
 });

@@ -70,6 +70,26 @@ function getAmountSpentByCategory(payments: Payment[]): CategoryExpense[] {
   }, []);
 }
 
-export function compareUserConsumption({ userId }: { userId: number }) {
-  return [];
+export function compareUserConsumption({
+  userId,
+}: {
+  userId: number;
+}): CategoryExpense[] {
+  const { currentMonthPayments, lastMonthPayments } = fetchUserPayments(userId);
+
+  const spentAmountCurrentMonth =
+    getAmountSpentByCategory(currentMonthPayments);
+  const spentAmountLastMonth = getAmountSpentByCategory(lastMonthPayments);
+
+  return spentAmountCurrentMonth.filter((categoryExpense) => {
+    const { category, totalAmount } = categoryExpense;
+    const lastMonthExpense = spentAmountLastMonth.find(
+      (lastMonthCategoryExpense) =>
+        lastMonthCategoryExpense.category === category
+    );
+
+    return (
+      !lastMonthExpense || totalAmount > 1.5 * lastMonthExpense.totalAmount
+    );
+  });
 }
