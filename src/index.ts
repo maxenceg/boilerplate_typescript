@@ -93,3 +93,15 @@ export function compareUserConsumption({
     );
   });
 }
+
+export function composeExceedingExpensesEmail({
+  userId,
+}: {
+  userId: number;
+}): string | null {
+  const exceedingExpenses = compareUserConsumption({ userId });
+
+  if (!exceedingExpenses.length) {
+    return null;
+  }
+}

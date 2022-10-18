@@ -1,4 +1,4 @@
-import { compareUserConsumption } from "../src";
+import { compareUserConsumption, composeExceedingExpensesEmail } from "../src";
 
 describe("compare user consumption", () => {
   test("compareUserConsumption should return empty categories for unexisting user", () => {
@@ -20,5 +20,13 @@ describe("compare user consumption", () => {
         totalAmount: 90,
       },
     ]);
+  });
+});
+
+describe("compose exceeding expenses email", () => {
+  test("should not send email for normal consumption", () => {
+    const email = composeExceedingExpensesEmail({ userId: 3 });
+
+    expect(email).toEqual(null);
   });
 });

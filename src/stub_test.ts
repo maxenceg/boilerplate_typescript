@@ -57,13 +57,20 @@ export const PAYMENTS: Payment[] = [
     description: "",
     userId: 2,
   },
-  // {
-  //   category: Category.Golf,
-  //   price: 30,
-  //   date: new Date("2022-10-18T14:13:06.755Z"),
-  //   description: "",
-  //   userId: 3,
-  // },
+  {
+    category: Category.Golf,
+    price: 30,
+    date: new Date("2022-10-18T14:13:06.755Z"),
+    description: "",
+    userId: 3,
+  },
+  {
+    category: Category.Golf,
+    price: 25,
+    date: new Date("2022-09-18T14:13:06.755Z"),
+    description: "",
+    userId: 3,
+  },
   // {
   //   category: Category.Groceries,
   //   price: 98,
