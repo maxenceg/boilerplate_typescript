@@ -104,4 +104,20 @@ export function composeExceedingExpensesEmail({
   if (!exceedingExpenses.length) {
     return null;
   }
+
+  const message = `Hello card user!
+
+We have detected unusually high spending on your card in these categories:
+
+${exceedingExpenses
+  .map(
+    ({ category, totalAmount }) => `* You spent $${totalAmount} on ${category}`
+  )
+  .join("\n")}
+
+Love,
+
+The Credit Card Company`;
+
+  return message;
 }
