@@ -38,3 +38,7 @@ export function fetchUserPayments(userId: number): {
     ),
   };
 }
+
+export function compareUserConsumption({ userId }: { userId: number }) {
+  return [];
+}
