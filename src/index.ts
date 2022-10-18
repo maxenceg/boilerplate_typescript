@@ -1,5 +1,5 @@
 import { PAYMENTS } from "./stub_test";
-import { Payment } from "./types";
+import { Category, Payment } from "./types";
 
 class PaymentServiceMock {
   public getAll(): Payment[] {
@@ -37,6 +37,37 @@ export function fetchUserPayments(userId: number): {
         date.getFullYear() === lastMonthYear
     ),
   };
+}
+
+type CategoryExpense = {
+  category: Category;
+  totalAmount: number;
+};
+
+// Note: this function coud be tested independently
+function getAmountSpentByCategory(payments: Payment[]): CategoryExpense[] {
+  return payments.reduce<CategoryExpense[]>((acc, payment) => {
+    const { category, price } = payment;
+
+    const existingCategory = acc.find(
+      (categoryExpense) => categoryExpense.category === category
+    );
+
+    if (!existingCategory) {
+      return [...acc, { category, totalAmount: price }];
+    }
+
+    return acc.map((categoryExpense) => {
+      if (categoryExpense.category === category) {
+        return {
+          ...categoryExpense,
+          totalAMount: categoryExpense.totalAmount + price,
+        };
+      }
+
+      return categoryExpense;
+    });
+  }, []);
 }
 
 export function compareUserConsumption({ userId }: { userId: number }) {
